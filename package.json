@@ -1,0 +1,10 @@
+{
+  "name": "mdarahim-topup-store",
+  "version": "1.0.0",
+  "private": true,
+  "description": "موقع بطاقات الشراء الترفيهية وشحن الألعاب والتطبيقات (54 لعبة وتطبيق)",
+  "scripts": {
+    "start": "npx serve .",
+    "build": "echo 'Static build ready for Vercel'"
+  }
+}

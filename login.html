@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl" data-theme="dark" data-bs-theme="dark">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#0a0e14">
+    <title>تسجيل الدخول | متجر الشحن السعودي اليمني</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="../static/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../static/css/custom.css">
+    <link rel="stylesheet" href="../static/css/auth.css">
+</head>
+
+<body class="auth-page">
+    <main class="auth-card">
+        <button id="btnThemeToggle" type="button" class="theme-toggle" aria-label="تبديل الوضع الليلي/النهاري"></button>
+
+        <div class="auth-logo">SY</div>
+        <h1 class="auth-title">تسجيل الدخول</h1>
+        <p class="auth-sub">مرحباً بعودتك — سجّل الدخول لمتابعة طلباتك وشحن رصيدك</p>
+
+        <form action="" method="post" class="form" novalidate>
+            <div class="mb-3">
+                <label for="emailInput" class="form-label">البريد الإلكتروني</label>
+                <input id="emailInput" name="email" type="email" class="form-control" placeholder="name@example.com"
+                    dir="ltr" autocomplete="email" required>
+            </div>
+
+            <div class="mb-4">
+                <label for="passwordInput" class="form-label">كلمة المرور</label>
+                <input id="passwordInput" name="password" type="password" class="form-control" placeholder="••••••••"
+                    dir="ltr" autocomplete="current-password" required>
+            </div>
+
+            <button type="submit" class="btn btn-brand w-100">تسجيل الدخول</button>
+
+            <div class="auth-divider">أو</div>
+
+            <p class="auth-foot mb-0">
+                ليس لديك حساب؟
+                <a href="signup.html" class="auth-link">إنشاء حساب جديد</a>
+            </p>
+
+            <p class="auth-foot mt-3 mb-0">
+                <a href="../index.html" class="auth-link" style="font-size:.78rem">← العودة إلى المتجر</a>
+            </p>
+        </form>
+    </main>
+
+    <script src="../static/js/bootstrap.min.js"></script>
+    <script src="../static/js/auth.js"></script>
+</body>
+
+</html>

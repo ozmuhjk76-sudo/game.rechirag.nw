@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl" data-theme="dark" data-bs-theme="dark">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#0a0e14" />
+  <meta name="description"
+    content="متجر الشحن الإلكتروني — شحن فوري للألعاب والبطاقات الرقمية في المملكة العربية السعودية والجمهورية اليمنية." />
+  <title>متجر الشحن السعودي اليمني | شحن فوري للألعاب والبطاقات</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="static/css/bootstrap.min.css">
+  <link rel="stylesheet" href="static/css/custom.css">
+  <link rel="stylesheet" href="static/css/store.css">
+</head>
+
+<body>
+
+  <!-- ================= HEADER ================= -->
+  <header class="app-header sticky-top">
+    <div class="container-xxl">
+
+      <!-- row 1: brand + actions -->
+      <div class="d-flex align-items-center gap-2 flex-wrap justify-content-end">
+        <select id="currencySelect" class="form-select form-select-sm currency-select" aria-label="العملة">
+          <option value="SAR" selected>ر.س (سعودي)</option>
+          <option value="YER">ر.ي (يمني)</option>
+          <option value="USD">$ (دولار)</option>
+        </select>
+
+        <button id="btnOpenWallet" type="button" class="wallet-pill" title="محفظتي">
+          <span id="walletBalanceDisplay">100.00 ر.س</span>
+        </button>
+
+        <button id="btnOpenOrders" type="button" class="icon-btn" title="طلباتي وسجل الشحن">
+          <span class="d-none d-md-inline">طلباتي</span>
+          <span id="ordersCountBadge" class="count-badge">0</span>
+        </button>
+
+        <button id="btnOpenAdmin" type="button" class="icon-btn" title="إعدادات المتجر">
+          <span class="d-none d-lg-inline">الإدارة</span>
+        </button>
+
+        <button id="btnThemeToggle" type="button" class="theme-toggle" aria-label="تبديل الوضع الليلي/النهاري"></button>
+
+        <!-- NEW: auth actions -->
+        <a href="accounts\login.html" class="icon-btn auth-login-btn d-none d-sm-inline-flex" title="تسجيل الدخول">
+          <span>دخول</span>
+        </a>
+        <a href="accounts\signup.html" class="btn btn-brand auth-signup-btn" title="إنشاء حساب جديد">
+          <span class="d-none d-sm-inline">حساب جديد</span>
+          <span class="d-sm-none">حساب</span>
+        </a>
+      </div>
+
+      <!-- row 2: search + filters -->
+      <div class="pb-3 d-flex flex-column gap-2">
+        <div class="search-wrap">
+          <svg class="search-icon" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round"
+              d="M21 21l-4.35-4.35m0 0A7.5 7.5 0 103.5 10.5a7.5 7.5 0 0013.15 6.15z" />
+          </svg>
+          <input id="searchInput" type="text" class="form-control search-input"
+            placeholder="ابحث عن لعبة أو تطبيق (مثال: بوبجي، فري فاير، قوقل بلاي، تيكتوك، شاهد)..." />
+          <button id="btnClearSearch" type="button" class="search-clear" aria-label="مسح البحث">✕</button>
+        </div>
+
+        <div class="d-flex align-items-center justify-content-between gap-3">
+          <div class="cat-pills" id="categoryFilterPills">
+            <button type="button" data-cat="all" class="cat-pill active">الكل</button>
+            <button type="button" data-cat="games" class="cat-pill">الألعاب</button>
+            <button type="button" data-cat="cards" class="cat-pill">بطاقات الشراء</button>
+            <button type="button" data-cat="entertainment" class="cat-pill">الترفيه</button>
+            <button type="button" data-cat="chat" class="cat-pill">الشات</button>
+            <button type="button" data-cat="pc" class="cat-pill">برامج الكمبيوتر</button>
+            <button type="button" data-cat="new" class="cat-pill">جديد</button>
+          </div>
+
+          <button id="btnToggleGridWidth" type="button"
+            class="btn btn-ghost d-none d-md-inline-flex align-items-center gap-2" title="تبديل عرض الشبكة">
+            <span id="gridModeLabel">عرض الجوال</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- ================= MAIN ================= -->
+  <main id="mainContainer" class="container-xxl py-4 flex-grow-1">
+
+    <!-- Dual-identity Welcome Banner -->
+    <div class="welcome-banner mb-4">
+      <div class="welcome-banner-flags">🇸🇦 🇾🇪</div>
+      <div>
+        <h3>أهلاً بك في متجر الشحن السعودي اليمني</h3>
+        <p>شحن فوري وآمن لجميع الألعاب والبطاقات الرقمية — نخدم عملاءنا في المملكة العربية السعودية والجمهورية اليمنية
+          بأفضل الأسعار.</p>
+      </div>
+    </div>
+
+    <!-- Trust strip (text only) -->
+    <div class="trust-strip mb-4">
+      <span><i class="dot"></i> شحن فوري</span>
+      <span><i class="dot"></i> دفع آمن</span>
+      <span><i class="dot red"></i> متجر سعودي يمني</span>
+      <span><i class="dot"></i> دعم 24/7</span>
+      <span><i class="dot gold"></i> موثوق</span>
+    </div>
+
+    <div id="sectionsWrapper" class="d-flex flex-column gap-4 gap-md-5"></div>
+
+    <div id="emptyState" class="empty-state d-none">
+      <h3 class="fw-bold mt-3 mb-2" style="font-size:1.1rem">لا توجد نتائج مطابقة</h3>
+      <p class="mb-4">جرب البحث بكلمة أخرى أو استعرض جميع الأقسام.</p>
+      <button id="btnResetFilters" type="button" class="btn btn-brand">عرض جميع التطبيقات</button>
+    </div>
+  </main>
+
+  <!-- ================= FOOTER ================= -->
+  <footer class="app-footer">
+    <div class="container-xxl d-flex flex-wrap align-items-center justify-content-between gap-3">
+      <div class="d-flex align-items-center gap-2 flex-wrap">
+        <span style="color:var(--brand-light)">●</span>
+        <span class="fw-bold" style="color:var(--text-secondary)">متجر الشحن السعودي اليمني</span>
+        <span>— جميع التطبيقات مفعّلة للشحن الفوري</span>
+      </div>
+      <div class="d-flex align-items-center gap-2 flex-wrap">
+        <a href="accounts/login.html" class="footer-auth-link">تسجيل الدخول</a>
+        <span>•</span>
+        <a href="accounts/signup.html" class="footer-auth-link">إنشاء حساب جديد</a>
+      </div>
+    </div>
+  </footer>
+  <!-- ========================================================= -->
+  <!-- 1. TOP-UP MODAL                                           -->
+  <!-- ========================================================= -->
+  <div id="topupModal" class="app-modal" role="dialog" aria-modal="true" aria-labelledby="modalAppName">
+    <div class="modal-card md">
+      <div class="modal-head">
+        <div class="d-flex align-items-center gap-3 min-w-0">
+          <div id="modalAppIcon" class="modal-app-icon"></div>
+          <div class="min-w-0">
+            <div class="d-flex align-items-center gap-2">
+              <h2 id="modalAppName" class="mb-0 fw-bold text-truncate" style="font-size:.95rem"></h2>
+              <span id="modalNewBadge" class="badge-new d-none">جديد</span>
+            </div>
+            <div class="d-flex align-items-center gap-2 mt-1" style="font-size:.72rem;color:var(--muted)">
+              <span id="modalCategoryName"></span>
+              <span>•</span>
+              <span style="color:var(--brand-light)">شحن فوري تلقائي</span>
+            </div>
+          </div>
+        </div>
+        <button id="btnCloseTopupModal" type="button" class="modal-close" aria-label="إغلاق">✕</button>
+      </div>
+
+      <div class="modal-body-app">
+        <div>
+          <label class="step-label"><span class="num">1</span> اختر الباقة / الفئة:</label>
+          <div id="modalPackagesGrid" class="pkg-grid"></div>
+        </div>
+
+        <div id="playerInputSection">
+          <div class="d-flex align-items-center justify-content-between gap-2 mb-2">
+            <label id="playerInputLabel" for="playerIdInput" class="step-label mb-0">
+              <span class="num">2</span> أدخل معرف اللاعب أو رقم الحساب:
+            </label>
+            <button id="btnVerifyPlayer" type="button" class="btn btn-ghost py-1 px-2"
+              style="font-size:.72rem">تحقق</button>
+          </div>
+          <input id="playerIdInput" type="text" class="form-control form-control-app mb-2"
+            placeholder="مثال: 5128493021" />
+          <div id="playerVerifyStatus" class="mb-3" style="font-size:.76rem"></div>
+
+          <label for="customerContactInput" class="form-label-app">
+            رقم الواتساب أو الهاتف <span style="color:#647083">(اختياري)</span>
+          </label>
+          <input id="customerContactInput" type="tel" class="form-control form-control-app"
+            placeholder="مثال: 05XXXXXXXX" />
+        </div>
+
+        <div>
+          <label class="step-label"><span class="num">3</span> اختر وسيلة الدفع:</label>
+          <div class="pay-grid" id="paymentMethodsGrid">
+            <button type="button" data-pay="wallet" class="pay-btn active"><span>محفظة الموقع</span></button>
+            <button type="button" data-pay="stcpay" class="pay-btn"><span>STC Pay</span></button>
+            <button type="button" data-pay="mada" class="pay-btn"><span>مدى</span></button>
+            <button type="button" data-pay="applepay" class="pay-btn"><span>Apple Pay</span></button>
+            <button type="button" data-pay="tabby" class="pay-btn"><span>تابي Tabby</span></button>
+            <button type="button" data-pay="bank" class="pay-btn"><span>تحويل بنكي</span></button>
+          </div>
+        </div>
+
+        <div class="total-bar">
+          <div class="d-flex flex-column">
+            <span style="font-size:.72rem;color:var(--muted)">الإجمالي المطلوب</span>
+            <span id="modalTotalPrice" class="fw-bold" style="font-size:1.15rem;color:var(--brand-light)">0</span>
+          </div>
+          <button id="btnConfirmTopup" type="button" class="btn btn-brand">
+            تنفيذ الشحن الآن
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========================================================= -->
+  <!-- 2. RECEIPT MODAL                                          -->
+  <!-- ========================================================= -->
+  <div id="receiptModal" class="app-modal" role="dialog" aria-modal="true">
+    <div class="modal-card sm">
+      <div class="modal-body-app text-center" style="padding-top:1.6rem">
+        <div class="mx-auto d-grid"
+          style="width:64px;height:64px;place-items:center;border-radius:20px;background:rgba(0,166,81,.14);border:1px solid rgba(0,166,81,.4);font-size:1.6rem;color:var(--brand-light)">
+          ✓</div>
+        <div>
+          <h3 class="fw-bold mb-1" style="font-size:1rem">تم تنفيذ طلب الشحن بنجاح</h3>
+          <p id="receiptOrderNum" class="mb-0" style="font-size:.76rem;color:var(--muted)"></p>
+        </div>
+
+        <div class="receipt-rows text-start">
+          <div><span class="k">التطبيق / الخدمة:</span><span id="receiptAppName" class="v"></span></div>
+          <div><span class="k">الباقة:</span><span id="receiptPkgName" class="v"></span></div>
+          <div><span class="k">المعرف / المستلم:</span><span id="receiptTarget" class="v"></span></div>
+          <div><span class="k">وسيلة الدفع:</span><span id="receiptPayMethod" class="v"></span></div>
+          <div><span class="k">المبلغ المدفوع:</span><span id="receiptAmount" class="v"
+              style="color:var(--brand-light)"></span></div>
+        </div>
+
+        <div id="receiptPinBox" class="code-box d-none">
+          <div class="mb-2" style="font-size:.74rem;color:var(--gold-light)">كود البطاقة / مفتاح التنشيط الفوري</div>
+          <code id="receiptSerialCode">XXXX-XXXX-XXXX</code>
+          <button id="btnCopySerial" type="button" class="btn btn-ghost d-block mx-auto mt-2 py-1 px-3"
+            style="font-size:.72rem">نسخ الكود</button>
+        </div>
+
+        <div class="d-flex flex-column gap-2">
+          <button id="btnSendWhatsappReceipt" type="button" class="btn btn-brand">
+            إرسال الإيصال عبر واتساب
+          </button>
+          <button id="btnCloseReceiptModal" type="button" class="btn btn-ghost">إغلاق</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========================================================= -->
+  <!-- 3. WALLET MODAL                                           -->
+  <!-- ========================================================= -->
+  <div id="walletModal" class="app-modal" role="dialog" aria-modal="true">
+    <div class="modal-card sm">
+      <div class="modal-head">
+        <h3>محفظتي — الرصيد الإلكتروني</h3>
+        <button id="btnCloseWalletModal" type="button" class="modal-close" aria-label="إغلاق">✕</button>
+      </div>
+      <div class="modal-body-app">
+        <div class="total-bar flex-column align-items-start">
+          <span style="font-size:.74rem;color:var(--muted)">رصيدك الحالي</span>
+          <span id="walletModalBalance" class="fw-bold" style="font-size:1.5rem;color:var(--brand-light)">100.00
+            ر.س</span>
+        </div>
+        <div>
+          <label class="form-label-app">إضافة رصيد تجريبي للمحفظة:</label>
+          <div class="d-flex gap-2">
+            <button type="button" data-topup-sar="50" class="btn btn-ghost flex-fill">+50 ر.س</button>
+            <button type="button" data-topup-sar="100" class="btn btn-ghost flex-fill">+100 ر.س</button>
+            <button type="button" data-topup-sar="200" class="btn btn-ghost flex-fill">+200 ر.س</button>
+          </div>
+        </div>
+        <p class="mb-0" style="font-size:.76rem;color:var(--muted);line-height:1.9">
+          يمكنك شحن رصيدك عبر STC Pay، مدى، Apple Pay، أو التحويل البنكي.
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========================================================= -->
+  <!-- 4. ORDERS MODAL                                           -->
+  <!-- ========================================================= -->
+  <div id="ordersModal" class="app-modal" role="dialog" aria-modal="true">
+    <div class="modal-card md">
+      <div class="modal-head">
+        <h3>سجل عمليات الشحن والطلبات</h3>
+        <button id="btnCloseOrdersModal" type="button" class="modal-close" aria-label="إغلاق">✕</button>
+      </div>
+      <div id="ordersListContainer" class="modal-body-app"></div>
+    </div>
+  </div>
+
+  <!-- ========================================================= -->
+  <!-- 5. ADMIN MODAL                                            -->
+  <!-- ========================================================= -->
+  <div id="adminModal" class="app-modal" role="dialog" aria-modal="true">
+    <div class="modal-card md">
+      <div class="modal-head">
+        <h3>إعدادات المتجر وتخصيص الأسعار</h3>
+        <button id="btnCloseAdminModal" type="button" class="modal-close" aria-label="إغلاق">✕</button>
+      </div>
+      <div class="modal-body-app">
+        <div>
+          <label for="adminStoreName" class="form-label-app">اسم الموقع / المتجر:</label>
+          <input id="adminStoreName" type="text" value="متجر الشحن السعودي اليمني"
+            class="form-control form-control-app" />
+        </div>
+        <div>
+          <label for="adminWhatsappNum" class="form-label-app">رقم واتساب الإدارة <span style="color:#647083">(بدون
+              +)</span>:</label>
+          <input id="adminWhatsappNum" type="text" value="966500000000" class="form-control form-control-app"
+            dir="ltr" />
+        </div>
+        <div class="row g-2">
+          <div class="col-12 col-sm-6">
+            <label for="adminRateSar" class="form-label-app">سعر صرف الدولار (SAR):</label>
+            <input id="adminRateSar" type="number" step="0.05" value="3.75" class="form-control form-control-app"
+              dir="ltr" />
+          </div>
+          <div class="col-12 col-sm-6">
+            <label for="adminRateUsd" class="form-label-app">سعر صرف الدولار (ريال يمني):</label>
+            <input id="adminRateUsd" type="number" step="0.01" value="530" class="form-control form-control-app"
+              dir="ltr" />
+          </div>
+        </div>
+        <div class="d-flex flex-column flex-sm-row gap-2 pt-1">
+          <button id="btnSaveAdminSettings" type="button" class="btn btn-brand flex-fill">حفظ الإعدادات</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========================================================= -->
+  <!-- 6. DEPLOY GUIDE MODAL                                     -->
+  <!-- ========================================================= -->
+
+
+  <!-- Toast -->
+  <div id="toastBox" class="toast-app" role="status" aria-live="polite">
+    <span id="toastMsg"></span>
+  </div>
+
+  <script src="static/js/bootstrap.min.js"></script>
+  <script src="static/js/store.js"></script>
+</body>
+
+</html>
